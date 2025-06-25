@@ -1,0 +1,12 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Головна - To-Do App{% endblock %}
+
+{% block header %}Ласкаво просимо до To-Do App!{% endblock %}
+
+{% block content %}
+    <p>Натисни кнопку нижче, щоб переглянути список завдань:</p>
+    <a href="{% url 'task-list' %}">
+        <button>Перейти до списку завдань</button>
+    </a>
+{% endblock %}

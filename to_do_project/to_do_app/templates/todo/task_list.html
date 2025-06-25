@@ -1,0 +1,25 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Список задач{% endblock %}
+
+{% block content %}
+  <h2>🗂️ Список задач</h2>
+
+  {% if tasks %}
+    <ul class="task-list">
+      {% for task in tasks %}
+        <li class="{% if task.completed %}completed{% endif %}">
+          <span>{{ task.task_name }}</span>
+
+          {% if not task.complete %}
+              <span class="badge">✓ Виконано</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Завдань поки що немає. Створи перше 📝</p>
+  {% endif %}
+
+
+{% endblock %}
