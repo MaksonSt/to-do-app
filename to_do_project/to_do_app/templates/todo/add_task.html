@@ -1,0 +1,15 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Додати задачу{% endblock %}
+
+{% block content %}
+  <h2>➕ Створити нову задачу</h2>
+
+  <form method="POST" class="task-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn">💾 Зберегти</button>
+    <a href="{% url 'Home' %}" class="btn cancel">↩ Назад</a>
+  </form>
+{% endblock %}

@@ -1,25 +1,37 @@
 {% extends 'todo/base.html' %}
 
-{% block title %}Список задач{% endblock %}
+{% block title %}To-Do List{% endblock %}
 
 {% block content %}
-  <h2>🗂️ Список задач</h2>
-
-  {% if tasks %}
-    <ul class="task-list">
-      {% for task in tasks %}
-        <li class="{% if task.completed %}completed{% endif %}">
-          <span>{{ task.task_name }}</span>
-
-          {% if not task.complete %}
-              <span class="badge">✓ Виконано</span>
-          {% endif %}
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>Завдань поки що немає. Створи перше 📝</p>
-  {% endif %}
-
-
+    <div class="task-list">
+        <h2 class="text-center mb-4">To-Do List</h2>
+        <br>
+        <div class="task-actions">
+            <a href="{% url 'add_task' %}" class="btn btn-primary btn-sm">Add New Task</a>
+            <br>
+            <br>
+          <a href="{% url 'Home'%}" class="btn btn-outline-danger">Home page </a>
+        </div>
+        {% for task in tasks %}
+            <div class="task-item">
+                <div>
+                    <span class="task-title">{{ task.task_name }}</span>
+                    <p class="task-description">{{ task.description }}</p>
+                    {% if task.complete %}
+                        <span class="completed">Completed</span>
+                        <a href="{% url 'task_complete' task.pk %}" class="btn btn-sm btn-outline-info">Mark as Uncompleted</a>
+                    {% else %}
+                        <a href="{% url 'task_complete' task.pk %}" class="btn btn-sm btn-success">Mark as Completed</a>
+                    {% endif %}
+                </div>
+                <div class="task-actions">
+                    <a href="{% url 'update_task' task.pk%}" class="btn btn-outline-warning">Update task</a>
+                    <a href="{% url 'delete_task' task.pk %}" class="btn btn-outline-danger">Delete task </a>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-center">No tasks available. Start by adding a task!</p>
+        {% endfor %}
+    </div>
 {% endblock %}
+

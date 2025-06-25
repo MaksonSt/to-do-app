@@ -12,8 +12,7 @@ def home(request):
 
 def task_list(request):
     tasks = Task.objects.all()
-    context = {'tasks': tasks}
-    return render(request, 'todo/task_list.html', context)
+    return render(request, 'todo/task_list.html', {'tasks': tasks})
 
 
 def add_task(request):
@@ -21,9 +20,33 @@ def add_task(request):
         form = TaskForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('task_list')
+        return redirect('task-list')
+    else:
+        form = TaskForm()
+    return render(request, 'todo/add_task.html', {'form': form})
 
 
 
-def complete_task(request):
-    pass
+def complete_task(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.complete = not task.complete
+    task.save()
+    return redirect('task-list')
+
+
+def delete_task(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.delete()
+    return redirect('task-list')
+
+
+def edit_task(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('task-list')
+    else:
+        form = TaskForm(instance=task)
+    return render(request, 'todo/update_task.html', {'form': form})

@@ -167,3 +167,34 @@ footer a {
 footer a:hover {
     color: #007bff;
 }
+
+
+/* Task adding */
+.task-form {
+  background: black;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  margin-top: 20px;
+}
+
+.task-form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.task-form .btn {
+  margin-top: 10px;
+}
+
+.btn.cancel {
+  background: #dcdde1;
+  color: #2f3640;
+}
+
+.btn.cancel:hover {
+  background: #c0c0c0;
+}
