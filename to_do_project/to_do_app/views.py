@@ -4,9 +4,8 @@ from django.http import HttpResponse
 from .models import Task
 from .forms import TaskForm
 
-
 def home(request):
-    return render(request, 'todo/home.html')
+    return render(request, 'todo/home.html', )
 
 
 
@@ -16,8 +15,8 @@ def task_list(request):
 
 
 def add_task(request):
-    if request.method == 'POST':
-        form = TaskForm(request.POST)
+    if request.method == 'POST': # check which method we have in request
+        form = TaskForm(request.POST) #in request.POST data which we take from request
         if form.is_valid():
             form.save()
         return redirect('task-list')
