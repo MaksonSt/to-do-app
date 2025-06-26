@@ -171,19 +171,26 @@ footer a:hover {
 
 /* Task adding */
 .task-form {
-  background: black;
+  background: rgb(146, 71, 71);
   padding: 20px;
   border-radius: 8px;
   max-width: 500px;
+  margin: 0 auto;
   margin-top: 20px;
 }
 
 .task-form input[type="text"] {
-  width: 100%;
+     display: block;
+  margin: 0 auto;         
+  width: 80%;           
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+.plus{
+      text-align: center;
 }
 
 .task-form .btn {
