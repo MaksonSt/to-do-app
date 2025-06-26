@@ -1,6 +1,5 @@
 {% load static %}
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +11,19 @@
 <body>
     <header>
         <h1>{% block header %}To-Do List{% endblock %}</h1>
+
+        <nav>
+            {% if user.is_authenticated %}
+                <p>Вітаю, {{ user.username }}!</p>
+                <form action="{% url 'logout' %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger">Вийти</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Увійти</a> |
+                <a href="{% url 'register' %}">Реєстрація</a>
+            {% endif %}
+        </nav>
     </header>
 
     <div class="container mt-5">

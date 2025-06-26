@@ -6,3 +6,4 @@ from .models import Task
 class TaskAdmin(admin.ModelAdmin):
     list_display = ('task_name', 'description', 'data_added', 'complete')
 
+

@@ -1,0 +1,26 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Увійти{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2>Вхід до облікового запису</h2>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <button type="submit" class="btn btn-success">Увійти</button>
+    </form>
+
+    {% if form.errors %}
+      <div class="alert alert-danger mt-3">
+        <p>Невірне ім’я користувача або пароль.</p>
+      </div>
+    {% endif %}
+
+    <p class="mt-3">
+      Ще не маєш акаунта? <a href="{% url 'register' %}">Зареєструватися</a>
+    </p>
+  </div>
+{% endblock %}
