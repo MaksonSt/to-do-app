@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.template import loader
-from django.http import HttpResponse
 from .models import Task
 from .forms import TaskForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+
 
 def home(request):
     return render(request, 'todo/home.html', )
-
 
 
 def task_list(request):
@@ -49,3 +49,17 @@ def edit_task(request, pk):
     else:
         form = TaskForm(instance=task)
     return render(request, 'todo/update_task.html', {'form': form})
+
+
+
+def register_user(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.save()
+            login(request, user)
+            return redirect('Home')
+    else:
+        form = UserCreationForm()
+    return render(request, 'todo/register.html', {'form': form})
