@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .models import Task
-from .forms import TaskForm
+from .forms import TaskForm, RegistrationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.core.mail import send_mail
 
 
 def home(request):
@@ -54,12 +55,24 @@ def edit_task(request, pk):
 
 def register_user(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
             user.save()
             login(request, user)
             return redirect('Home')
     else:
-        form = UserCreationForm()
+        form = RegistrationForm()
     return render(request, 'todo/register.html', {'form': form})
+
+
+def send_email(request):
+    send_mail(
+        subject= 'Notification',
+        message= 'Hello from John',
+        from_email= 'johncarterofic@gmail.com',
+        recipient_list= ['dgrigorij77@gmail.com'],
+        fail_silently=False
+    )
+
+    return HttpResponse('Hello')
