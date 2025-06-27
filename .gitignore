@@ -1,1 +1,21 @@
 .idea
+*.pyc
+__pycache__/
+.Python/
+venv/
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.cache
+*.egg-info/
+.pytest_cache/
+
+# Django specific
+*.log
+*.pot
+*.mo
+local_settings.py
+db.sqlite3
+media/
