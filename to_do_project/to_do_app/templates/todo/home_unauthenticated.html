@@ -1,0 +1,16 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Головна - To-Do App{% endblock %}
+
+{% block header %}Ласкаво просимо до To-Do App!{% endblock %}
+
+{% block content %}
+    <p>Натисни кнопку нижче, щоб зарегеструватись:</p>
+    <a href="{% url 'register' %}">
+        <button>Регестрація</button>
+    </a>
+    <p>Натисни кнопку нижче, щоб залогінитися:</p>
+    <a href="{% url 'login' %}">
+        <button>Увійти</button>
+    </a>
+{% endblock %}

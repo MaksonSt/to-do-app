@@ -13,6 +13,6 @@ urlpatterns = [
     path('update_task/<int:pk>/', views.edit_task, name='update_task'),
     path('register/', views.register_user, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='todo/login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='Home'), name='logout'),
     path('email/', views.send_email, name='email')
 ]

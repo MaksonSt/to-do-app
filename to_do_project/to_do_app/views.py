@@ -7,7 +7,10 @@ from django.core.mail import send_mail
 
 
 def home(request):
-    return render(request, 'todo/home.html', )
+    if request.user.is_authenticated:
+        return render(request, 'todo/home_authenticated.html')
+    else:
+        return render(request, 'todo/home_unauthenticated.html')
 
 
 def task_list(request):
