@@ -13,7 +13,7 @@
 
         <nav>
             {% if user.is_authenticated %}
-                <p>Вітаю, {{ user.username }}!</p>
+                <p>Вітаю, {{ user.name }}!</p>
                 <form action="{% url 'logout' %}" method="post">
                   {% csrf_token %}
                   <button type="submit" class="btn btn-danger">Вийти</button>
