@@ -1,12 +1,11 @@
-{% load static %}
-
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}To-Do App{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'todo/style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
     <header>
@@ -14,14 +13,11 @@
 
         <nav>
             {% if user.is_authenticated %}
-                <p>Вітаю, {{ user.username }}!</p>
+                <p>Вітаю, {{ user.name }}!</p>
                 <form action="{% url 'logout' %}" method="post">
                   {% csrf_token %}
                   <button type="submit" class="btn btn-danger">Вийти</button>
                 </form>
-            {% else %}
-                <a href="{% url 'login' %}">Увійти</a> |
-                <a href="{% url 'register' %}">Реєстрація</a>
             {% endif %}
         </nav>
     </header>
