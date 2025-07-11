@@ -3,7 +3,7 @@ from . import views
 from django.contrib.auth import views as auth_views
 
 
-
+app_name = "to_do_app"
 urlpatterns = [
     path('', views.home, name='Home'),
     path('task/', views.task_list, name='task-list'),
