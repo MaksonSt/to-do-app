@@ -12,7 +12,6 @@ class Task(models.Model):
     def __str__(self):
         return self.task_name
 
-
 class CustomUserManager(BaseUserManager):
     def _create_user(self, email, password, **extra_fields):
         if not email:
