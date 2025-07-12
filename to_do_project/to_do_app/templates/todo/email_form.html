@@ -10,7 +10,7 @@
 <body>
     <div class="reset-container">
         <h2>Відновлення паролю</h2>
-        <form action="{% url 'password_reset' %}" method="POST">
+        <form action="{% url 'to_do_app:password_reset' %}" method="POST">
             {% csrf_token %}
             {{ form.email.label_tag }}
             {{ form.email }}

@@ -146,7 +146,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LOGIN_REDIRECT_URL = 'Home'
+LOGIN_REDIRECT_URL = 'to_do_app:Home'
+
+LOGIN_URL = "/login"
 
 
 AUTH_USER_MODEL = 'to_do_app.CustomUser'

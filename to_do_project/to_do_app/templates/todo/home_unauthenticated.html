@@ -6,11 +6,11 @@
 
 {% block content %}
     <p>Натисни кнопку нижче, щоб зарегеструватись:</p>
-    <a href="{% url 'register' %}">
+    <a href="{% url 'to_do_app:register' %}">
         <button>Регестрація</button>
     </a>
     <p>Натисни кнопку нижче, щоб залогінитися:</p>
-    <a href="{% url 'login' %}">
+    <a href="{% url 'to_do_app:login' %}">
         <button>Увійти</button>
     </a>
 {% endblock %}
