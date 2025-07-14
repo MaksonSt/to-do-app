@@ -10,8 +10,25 @@ from django.utils.encoding import force_bytes
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 User = get_user_model()
+
+
+def login_required_message(function=None, login_url=None):
+    def decorator(view_func):
+        def _wrapped_view(request, *args, **kwargs):
+            if not request.user.is_authenticated:
+                messages.info(request, "Будь ласка, зареєструйтесь або увійдіть, щоб продовжити.")
+                return redirect(login_url or 'login')
+            return view_func(request, *args, **kwargs)
+        return _wrapped_view
+    if function:
+        return decorator(function)
+    return decorator
+
+
 
 def home(request):
     if request.user.is_authenticated:
@@ -20,11 +37,13 @@ def home(request):
         return render(request, 'todo/home_unauthenticated.html')
 
 
+@login_required_message(login_url='to_do_app:login')
 def task_list(request):
     tasks = Task.objects.all()
     return render(request, 'todo/task_list.html', {'tasks': tasks})
 
 
+@login_required_message(login_url='to_do_app:login')
 def add_task(request):
     if request.method == 'POST': # check which method we have in request
         form = TaskForm(request.POST) #in request.POST data which we take from request
@@ -36,7 +55,7 @@ def add_task(request):
     return render(request, 'todo/add_task.html', {'form': form})
 
 
-
+@login_required_message(login_url='to_do_app:login')
 def complete_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
     task.complete = not task.complete
@@ -44,12 +63,14 @@ def complete_task(request, pk):
     return redirect('task-list')
 
 
+@login_required_message(login_url='to_do_app:login')
 def delete_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
     task.delete()
     return redirect('task-list')
 
 
+@login_required_message(login_url='to_do_app:login')
 def edit_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
     if request.method == 'POST':
@@ -70,7 +91,7 @@ def register_user(request):
             user = form.save()
             user.save()
             login(request, user)
-            return redirect('Home')
+            return redirect('to_do_app:Home')
     else:
         form = RegistrationForm()
     return render(request, 'todo/register.html', {'form': form})

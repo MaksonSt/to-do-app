@@ -6,11 +6,11 @@
 
 {% block content %}
     <p>Натисни кнопку нижче, щоб переглянути список завдань:</p>
-    <a href="{% url 'task-list' %}">
+    <a href="{% url 'to_do_app:task-list' %}">
         <button>Перейти до списку завдань</button>
     </a>
     <p>Натисни кнопку нижче, щоб додати завдання:</p>
-    <a href="{% url 'add_task' %}">
+    <a href="{% url 'to_do_app:add_task' %}">
         <button>Додати завдання</button>
     </a>
 {% endblock %}

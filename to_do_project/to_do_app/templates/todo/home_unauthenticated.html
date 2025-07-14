@@ -10,10 +10,16 @@
     <h2>Натисни кнопку нижче, щоб зарегеструватись:</h2>
     <a href="{% url 'register' %}">
         <button class="btn">Регестрація</button>
+    <p>Натисни кнопку нижче, щоб зарегеструватись:</p>
+    <a href="{% url 'to_do_app:register' %}">
+        <button>Регестрація</button>
     </a>
     <h2>Натисни кнопку нижче, щоб залогінитися:</h2>
     <a href="{% url 'login' %}">
         <button class="btn">Увійти</button>
+    <p>Натисни кнопку нижче, щоб залогінитися:</p>
+    <a href="{% url 'to_do_app:login' %}">
+        <button>Увійти</button>
     </a>
 </div>    
 {% endblock %}

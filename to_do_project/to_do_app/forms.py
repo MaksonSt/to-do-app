@@ -8,7 +8,11 @@ User = get_user_model()
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['task_name', 'description']
+        fields = ['task_name', 'description', 'due_date']
+
+        widgets = {
+            'due_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
 
 
 
