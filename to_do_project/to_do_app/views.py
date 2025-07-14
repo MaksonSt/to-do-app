@@ -91,7 +91,7 @@ def register_user(request):
             user = form.save()
             user.save()
             login(request, user)
-            return redirect('Home')
+            return redirect('to_do_app:Home')
     else:
         form = RegistrationForm()
     return render(request, 'todo/register.html', {'form': form})
