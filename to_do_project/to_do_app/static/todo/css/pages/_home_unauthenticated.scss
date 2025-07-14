@@ -1,0 +1,42 @@
+@import '../base/variables';
+@import 'base/reset';
+@import 'base/mixins';
+
+body{
+    background-color: #f7f7f7;
+}
+header {
+text-align: center;
+background-color:$header-color; 
+color: $header-fonts-color;
+font-weight: 500;
+padding-bottom: 0.5rem
+}
+
+.centered_block {
+  margin: 32px;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.unauth_container { 
+    font-family: $font-main;
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 320px;
+        
+
+  h2 {
+    margin-bottom: 1rem;
+    font-size: 20px;
+    
+  &:nth-of-type(2) {
+    font-size: 20px;
+    padding-top: 1rem;
+    }
+  }
+}

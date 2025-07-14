@@ -5,12 +5,15 @@
 {% block header %}Ласкаво просимо до To-Do App!{% endblock %}
 
 {% block content %}
-    <p>Натисни кнопку нижче, щоб зарегеструватись:</p>
+<div class="centered_block">
+<div class="unauth_container">
+    <h2>Натисни кнопку нижче, щоб зарегеструватись:</h2>
     <a href="{% url 'register' %}">
-        <button>Регестрація</button>
+        <button class="btn">Регестрація</button>
     </a>
-    <p>Натисни кнопку нижче, щоб залогінитися:</p>
+    <h2>Натисни кнопку нижче, щоб залогінитися:</h2>
     <a href="{% url 'login' %}">
-        <button>Увійти</button>
+        <button class="btn">Увійти</button>
     </a>
+</div>    
 {% endblock %}
