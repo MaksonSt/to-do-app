@@ -44,3 +44,8 @@ class ResetPasswordForm(forms.Form):
     email = forms.EmailField()
     class Meta:
         fields = ['email']
+
+
+
+class TaskSearchForm(forms.Form):
+    query = forms.CharField(max_length=200, required=False, label="Пошук за назвою")

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .models import Task, CustomUser
-from .forms import TaskForm, RegistrationForm, ResetPasswordForm
+from .forms import TaskForm, RegistrationForm, ResetPasswordForm, TaskSearchForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, get_user_model
 from django.core.mail import send_mail
@@ -151,3 +151,21 @@ def password_reset_request(request):
         form = ResetPasswordForm()
 
     return render(request, 'todo/email_form.html', {'form': form})
+
+
+
+
+def search_task(request):
+    form = TaskSearchForm(request.GET or None)
+    tasks = Task.objects.all()
+
+    if form.is_valid() and form.cleaned_data['query']:
+        query = form.cleaned_data['query']
+        tasks = tasks.filter(task_name__icontains=query)
+
+    context = {
+        'form' : form,
+        'tasks' : tasks
+    }
+
+    return render(request, 'todo/task_list.html', context)

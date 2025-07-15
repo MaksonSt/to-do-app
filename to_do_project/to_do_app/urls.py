@@ -11,6 +11,7 @@ urlpatterns = [
     path('complete_task/<int:pk>/', views.complete_task, name='task_complete'),
     path('delete_task/<int:pk>', views.delete_task, name='delete_task'),
     path('update_task/<int:pk>/', views.edit_task, name='update_task'),
+    path('search/', views.search_task, name='search_task'),
     path('register/', views.register_user, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='todo/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='to_do_app:Home'), name='logout'),

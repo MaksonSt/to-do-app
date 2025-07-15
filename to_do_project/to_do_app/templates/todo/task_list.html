@@ -5,13 +5,24 @@
 {% block content %}
     <div class="task-list">
         <h2 class="text-center mb-4">To-Do List</h2>
-        <br>
+
+        <form method="GET" action="{% url 'to_do_app:search_task' %}" class="mb-4">
+            <div class="input-group">
+                {{ form.query }}
+                <div class="input-group-append">
+                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+
         <div class="task-actions">
             <a href="{% url 'to_do_app:add_task' %}" class="btn btn-primary btn-sm">Add New Task</a>
-            <br>
-            <br>
-          <a href="{% url 'to_do_app:Home'%}" class="btn btn-outline-danger">Home page </a>
+            <br><br>
+            <a href="{% url 'to_do_app:Home' %}" class="btn btn-outline-danger">Home page</a>
         </div>
+
+        <br>
+
         {% for task in tasks %}
             <div class="task-item">
                 <div>
@@ -26,8 +37,8 @@
                     {% endif %}
                 </div>
                 <div class="task-actions">
-                    <a href="{% url 'to_do_app:update_task' task.pk%}" class="btn btn-outline-warning">Update task</a>
-                    <a href="{% url 'to_do_app:delete_task' task.pk %}" class="btn btn-outline-danger">Delete task </a>
+                    <a href="{% url 'to_do_app:update_task' task.pk %}" class="btn btn-outline-warning">Update task</a>
+                    <a href="{% url 'to_do_app:delete_task' task.pk %}" class="btn btn-outline-danger">Delete task</a>
                 </div>
             </div>
         {% empty %}
@@ -35,4 +46,3 @@
         {% endfor %}
     </div>
 {% endblock %}
-
