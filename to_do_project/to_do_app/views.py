@@ -155,7 +155,7 @@ def password_reset_request(request):
 
 
 
-
+@login_required_message(login_url='to_do_app:login')
 def search_task(request):
     form = TaskSearchForm(request.GET or None)
     tasks = Task.objects.all()
