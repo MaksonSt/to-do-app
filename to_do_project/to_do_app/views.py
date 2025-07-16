@@ -11,6 +11,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from django.conf import settings
 from django.contrib import messages
+from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 
 User = get_user_model()
@@ -161,7 +162,7 @@ def search_task(request):
 
     if form.is_valid() and form.cleaned_data['query']:
         query = form.cleaned_data['query']
-        tasks = tasks.filter(task_name__icontains=query)
+        tasks = tasks.filter(Q(task_name__icontains=query) | Q(description__icontains=query))
 
     context = {
         'form' : form,
