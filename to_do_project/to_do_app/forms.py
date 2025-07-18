@@ -11,32 +11,29 @@ class TaskForm(forms.ModelForm):
         fields = ['task_name', 'description', 'due_date']
 
         widgets = {
-            'due_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'task_name': forms.TextInput(attrs={'class': 'task', 'placeholder': 'Task name'}),
+            'description': forms.Textarea(attrs={'class': 'task', 'placeholder': 'Description name'}),
+            'due_date': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'task', 'placeholder': 'Deadline'}),
+
         }
 
 
 
 class RegistrationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-    name = forms.CharField(max_length=45, required=True)
+    email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'reg', 'placeholder': 'Email field'}))
+    name = forms.CharField(max_length=45, required=True, widget=forms.TextInput(attrs={'class': 'reg', 'placeholder': 'Name'}))
+    password1 = forms.CharField(max_length=50, required=True, widget=forms.PasswordInput(attrs={'class': 'reg', 'placeholder': 'Password'}))
+    password2 = forms.CharField(max_length=50, required=True, widget=forms.PasswordInput(attrs={'class': 'reg', 'placeholder': 'Repeat Password'}))
     class Meta:
         model = User
         fields = ['name', 'email','password1' , 'password2']
 
-    class RegistrationForm(UserCreationForm):
-        email = forms.EmailField(required=True)
-        name = forms.CharField(max_length=45, required=True)
-
-        class Meta:
-            model = User
-            fields = ['name', 'email', 'password1', 'password2']
-
-        def clean(self):
-            cleaned_data = super().clean()
-            email = cleaned_data.get('email')
-            if email and User.objects.filter(email=email).exists():
-                self.add_error('email', 'Email already exist')
-            return cleaned_data
+    def clean(self):
+        cleaned_data = super().clean()
+        email = cleaned_data.get('email')
+        if email and User.objects.filter(email=email).exists():
+            self.add_error('email', 'Email already exist')
+        return cleaned_data
 
 
 
@@ -45,7 +42,10 @@ class ResetPasswordForm(forms.Form):
     class Meta:
         fields = ['email']
 
+        widgets = {
+            'email' : forms.EmailInput(attrs={'class': 'reset_pass'})
+        }
 
 
 class TaskSearchForm(forms.Form):
-    query = forms.CharField(max_length=200, required=False, label="Пошук за назвою")
+    query = forms.CharField(max_length=200, required=False, label="Пошук за назвою", widget=forms.TextInput(attrs={'class': 'searching'}))
