@@ -3,14 +3,16 @@
 {% block title %}Реєстрація{% endblock %}
 
 {% block content %}
-  <div class="container mt-5">
-    <h2>Реєстрація користувача</h2>
+<h2>Реєстрація користувача</h2>
+  <div class="container_register">
 
     <form method="post">
+      <div class="unauth_container">
       {% csrf_token %}
       {{ form.as_p }}
 
       <button type="submit" class="btn btn-primary">Зареєструватися</button>
+      </div>
     </form>
 
     <p class="mt-3">Вже є акаунт? <a href="{% url 'to_do_app:login' %}">Увійти</a></p>
