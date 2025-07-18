@@ -170,3 +170,17 @@ def search_task(request):
     }
 
     return render(request, 'todo/task_list.html', context)
+
+
+
+def about(request):
+    return render(request, "todo/about.html")
+
+
+def faqs(request):
+    return render(request, "todo/faqs.html")
+
+
+def features(request):
+    return render(request, "todo/features.html")
+
