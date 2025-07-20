@@ -20,7 +20,6 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='to_do_app:Home'), name='logout'),
     path('email/', views.send_email, name='email'),
     path('password-reset/', views.password_reset_request, name='password_reset'),
-    path('password-reset/', views.password_reset_request, name='password_reset'),
     path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(
         template_name='auth/password_reset_done.html'
     ), name='password_reset_done'),

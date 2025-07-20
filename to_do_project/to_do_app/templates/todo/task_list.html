@@ -28,7 +28,9 @@
                 <div>
                     <span class="task-title">{{ task.task_name }}</span>
                     <p class="task-description">{{ task.description }}</p>
-                    <p class="task-description">{{ task.due_date }}</p>
+                    {% if task.due_date %}
+                        <p class="task-description">{{ task.due_date }}</p>
+                    {% endif %}
                     {% if task.complete %}
                         <span class="completed">Completed</span>
                         <a href="{% url 'to_do_app:task_complete' task.pk %}" class="btn btn-sm btn-outline-info">Mark as Uncompleted</a>

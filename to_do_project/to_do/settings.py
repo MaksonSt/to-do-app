@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'to_do_app',
-    'user_profile',
+    'user_profile.apps.UserProfileConfig',
 ]
 
 MIDDLEWARE = [
