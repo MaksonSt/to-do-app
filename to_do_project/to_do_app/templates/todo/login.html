@@ -3,14 +3,15 @@
 {% block title %}Увійти{% endblock %}
 
 {% block content %}
-  <div class="container mt-5">
-    <h2>Вхід до облікового запису</h2>
-
+    <h1>Вхід до облікового запису</h1>
+  <div class="container_login">
     <form method="post">
+<div class="container_login_form">
       {% csrf_token %}
       {{ form.as_p }}
 
       <button type="submit" class="btn btn-success">Увійти</button>
+</div>
     </form>
 
     {% if form.errors %}

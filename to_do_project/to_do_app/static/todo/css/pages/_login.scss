@@ -1,0 +1,20 @@
+.container_login{
+  margin: 32px;
+  padding: 1rem;
+display: flex;
+  flex-direction: column;
+justify-content: center;
+  align-items: center;
+}
+.container_login_form{
+  font-family: $font-main;
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{% static 'todo/css/style.css' %}">
 </head>
 <body>
-<div class="wrapper d-flex flex-column min-vh-100">
+<div class="wrapper flex-column min-vh-100">
     <!-- Bootstrap Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -37,7 +37,7 @@
 
                 <div class="d-flex">
                     {% if user.is_authenticated %}
-                        <span class="text-white me-3">Вітаю, {{ user.name }}!</span>
+                        <span class="welcome_user">Вітаю, {{ user.name }}!</span>
                         <form action="{% url 'to_do_app:logout' %}" method="post" class="d-inline">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-outline-light me-2">Вийти</button>
@@ -71,7 +71,6 @@
     <!-- Main content -->
     <main class="flex-fill">
         <div class="container">
-            <h1 class="header">{% block header %}To-Do List{% endblock %}</h1>
             {% block content %}{% endblock %}
         </div>
     </main>

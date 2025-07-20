@@ -3,11 +3,11 @@
 {% block title %}Реєстрація{% endblock %}
 
 {% block content %}
-<h2>Реєстрація користувача</h2>
+<h1>Реєстрація користувача</h1>
   <div class="container_register">
 
     <form method="post">
-      <div class="unauth_container">
+      <div class="container_register_form">
       {% csrf_token %}
       {{ form.as_p }}
 
