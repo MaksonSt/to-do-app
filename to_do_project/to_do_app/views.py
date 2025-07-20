@@ -123,7 +123,7 @@ def password_reset_request(request):
                 token = default_token_generator.make_token(user)
                 uid = urlsafe_base64_encode(force_bytes(user.pk))
                 reset_link = request.build_absolute_uri(
-                    reverse('password_reset_confirm', kwargs={'uidb64': uid, 'token': token})
+                    reverse('to_do_app:password_reset_confirm', kwargs={'uidb64': uid, 'token': token})
                 )
 
                 subject = 'Відновлення паролю'

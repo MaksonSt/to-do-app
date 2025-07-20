@@ -1,8 +1,9 @@
 from django.urls import path
-from . import views
+from .views import UserProfileDetailView, UserProfileUpdateView
 
 
 app_name = "user_profile"
 urlpatterns = [
-    path('', views.change_name, name='profile')
+    path('<int:pk>/', UserProfileDetailView.as_view(), name='profile_detail'),
+    path('update/<int:pk>/', UserProfileUpdateView.as_view(template_name='userprofile/update_profile.html'), name='profile_edit')
 ]

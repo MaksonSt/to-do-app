@@ -1,18 +1,29 @@
 {% extends 'todo/base.html' %}
 
-{% block title %}Profile{% endblock %}
-
 {% block content %}
-<h1>My Account</h1>
+  <h1>Профіль користувача: {{ profile.user.name }}</h1>
 
-<form method="post" novalidate>
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-    <div>
-        {{ form.new_name.label_tag }}
-        {{ form.new_name }}
-        {{ form.new_name.errors }}
-    </div>
-    <button type="submit">Save changes</button>
-</form>
+  <div class="mb-3">
+    <p><strong>Ім'я:</strong> {{ profile.user.first_name }} {{ profile.user.last_name }}</p>
+    <p><strong>Email:</strong> {{ profile.user.email }}</p>
+  </div>
+
+  <div class="mb-3">
+    <h5>Аватар:</h5>
+    {% if profile.avatar %}
+      <img src="{{ profile.avatar.url }}" alt="Аватар {{ profile.user.username }}" class="rounded-circle" style="max-width: 150px; max-height: 150px;">
+    {% else %}
+      <p>Аватар не встановлений.</p>
+    {% endif %}
+  </div>
+
+  <div class="mb-3">
+    {% if profile.bio %}
+      <p><strong>Про себе:</strong> {{ profile.bio }}</p>
+    {% endif %}
+  </div>
+
+  <div class="mb-3">
+    <a href="{% url 'user_profile:profile_edit' profile.pk %}" class="btn btn-primary">Редагувати профіль</a>
+  </div>
 {% endblock %}
