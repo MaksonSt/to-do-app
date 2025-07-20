@@ -6,12 +6,14 @@
 {% block content %}
 <header class="header"><h1>Ласкаво просимо до To-Do App!</h1>
 </header>
-    <p>Натисни кнопку нижче, щоб переглянути список завдань:</p>
+<div class="container_home">
+    <h5>Натисни кнопку нижче, щоб переглянути список завдань:</h5>
     <a href="{% url 'to_do_app:task-list' %}">
         <button class="btn">Перейти до списку завдань</button>
     </a>
-    <p>Натисни кнопку нижче, щоб додати завдання:</p>
+    <h5>Натисни кнопку нижче, щоб додати завдання:</h5>
     <a href="{% url 'to_do_app:add_task' %}">
         <button class="btn">Додати завдання</button>
     </a>
+</div>
 {% endblock %}
