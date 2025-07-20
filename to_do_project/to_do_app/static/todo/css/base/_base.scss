@@ -1,0 +1,19 @@
+body{
+  background-color: #f7f7f7;
+}
+
+.header {
+  text-align: center;
+  color: black;
+  font-weight: 500;
+  padding-bottom: 0.5rem
+}
+.welcome_user{
+  color: white;
+}
+
+.d-flex{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

@@ -2,17 +2,8 @@
 @import '../base/reset';
 @import '../base/mixins';
 
-body{
-    background-color: #f7f7f7;
-  height: 100%;
-}
-.header {
-text-align: center;
-//background-color:$header-color;
-color: black;
-font-weight: 500;
-padding-bottom: 0.5rem
-}
+
+
 
 .wrapper {
   min-height: 100vh;
@@ -31,10 +22,6 @@ main {
   align-items: center;
 }
 
-.d-flex{
-  display: flex;
-
-}
 .text-white{
   text-align: center;
 }

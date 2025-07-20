@@ -3,9 +3,10 @@
 
 {% block title %}Update Task{% endblock %}
 
+
 {% block content %}
     <div class="add-task-form">
-        <h2 class="text-center mb-4" >Update Task</h2>
+        <h1 class="text-center mb-4" >Update Task</h1>
         <form method="post">
             {% csrf_token %}
              {{ form.as_p }}
