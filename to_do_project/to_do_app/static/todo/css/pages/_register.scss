@@ -1,14 +1,31 @@
-body{
-  background-color: #f7f7f7;
-}
+
 label {
-
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+display: none;
 }
 
-h2{
+h1{
   text-align: center;
+}
+.container_register_form{
+  font-family: $font-main;
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:  1rem;
+}
+input{
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1)
+}
+input:focus{
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.2);
 }
 
 .container_register{
@@ -21,6 +38,3 @@ h2{
 
 }
 
-.mt-3{
-    display: inline-block;
-}

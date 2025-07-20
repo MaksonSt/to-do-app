@@ -2,15 +2,16 @@
 
 {% block title %}Головна - To-Do App{% endblock %}
 
-{% block header %}Ласкаво просимо до To-Do App!{% endblock %}
 
 {% block content %}
+<header class="header"><h1>Ласкаво просимо до To-Do App!</h1>
+</header>
     <p>Натисни кнопку нижче, щоб переглянути список завдань:</p>
     <a href="{% url 'to_do_app:task-list' %}">
-        <button>Перейти до списку завдань</button>
+        <button class="btn">Перейти до списку завдань</button>
     </a>
     <p>Натисни кнопку нижче, щоб додати завдання:</p>
     <a href="{% url 'to_do_app:add_task' %}">
-        <button>Додати завдання</button>
+        <button class="btn">Додати завдання</button>
     </a>
 {% endblock %}
