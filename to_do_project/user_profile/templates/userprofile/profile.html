@@ -1,0 +1,18 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<h1>My Account</h1>
+
+<form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div>
+        {{ form.new_name.label_tag }}
+        {{ form.new_name }}
+        {{ form.new_name.errors }}
+    </div>
+    <button type="submit">Save changes</button>
+</form>
+{% endblock %}
