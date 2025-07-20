@@ -66,6 +66,7 @@ select {
 }
 .btn {
   width: 100%;
+  height: 100%;
   padding: 0.6rem;
   font-size: 1rem;
   background-color: #007bff;
@@ -74,10 +75,12 @@ select {
   color: white;
   cursor: pointer;
   transition: background-color 0.5s;
+  white-space: nowrap;
 }
 .btn:hover {
   background-color: #0056b3;
   transform: translateY(-1px);
+  color: black;
 }
 
 body {
@@ -174,14 +177,24 @@ select {
 }
 body {
   background-color: #f7f7f7;
+  height: 100%;
 }
 
-header {
+.header {
   text-align: center;
-  background-color: #343a40;
-  color: #e9ecef;
+  color: black;
   font-weight: 500;
   padding-bottom: 0.5rem;
+}
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
 }
 
 .centered_block {
@@ -190,6 +203,14 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.text-white {
+  text-align: center;
 }
 
 .unauth_container {
