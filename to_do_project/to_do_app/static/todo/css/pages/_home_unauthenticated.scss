@@ -1,16 +1,26 @@
 @import '../base/variables';
-@import 'base/reset';
-@import 'base/mixins';
+@import '../base/reset';
+@import '../base/mixins';
 
 body{
     background-color: #f7f7f7;
+  height: 100%;
 }
-header {
+.header {
 text-align: center;
-background-color:$header-color; 
-color: $header-fonts-color;
+//background-color:$header-color;
+color: black;
 font-weight: 500;
 padding-bottom: 0.5rem
+}
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
 }
 
 .centered_block {
@@ -21,6 +31,13 @@ padding-bottom: 0.5rem
   align-items: center;
 }
 
+.d-flex{
+  display: flex;
+
+}
+.text-white{
+  text-align: center;
+}
 .unauth_container { 
     font-family: $font-main;
     background: white;
