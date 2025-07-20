@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{% static 'todo/css/style.css' %}">
 </head>
 <body>
-
+<div class="wrapper d-flex flex-column min-vh-100">
     <!-- Bootstrap Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -47,8 +47,10 @@
                             <button type="submit" class="btn btn-outline-light me-2">My account</button>
                         </form>
                     {% else %}
+
                         <a href="{% url 'to_do_app:login' %}" class="btn btn-outline-light me-2">Login</a>
                         <a href="{% url 'to_do_app:register' %}" class="btn btn-warning">Sign-up</a>
+
                     {% endif %}
                 </div>
             </div>
@@ -70,15 +72,17 @@
     </div>
 
     <!-- Main content -->
-    <main class="container mt-5">
-        <h1 class="mb-4">{% block header %}To-Do List{% endblock %}</h1>
-        {% block content %}
-        {% endblock %}
+    <main class="flex-fill">
+        <div class="container">
+            <h1 class="header">{% block header %}To-Do List{% endblock %}</h1>
+            {% block content %}{% endblock %}
+        </div>
     </main>
 
     <footer class="text-center py-4 bg-light mt-5">
         <p class="mb-0">© 2025 To-Do App | Django Project</p>
     </footer>
+</div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
