@@ -3,12 +3,12 @@
 {% block content %}
   <h1>Редагування профілю</h1>
 
-  <form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form1.as_p }}
+    {{ form2.as_p }}
+    <button type="submit">Оновити</button>
+</form>
 
-    <button type="submit" class="btn btn-primary">Зберегти зміни</button>
-  </form>
-
-  <a href="{% url 'user_profile:profile_detail' form.instance.pk %}">Повернутися до профілю</a>
+  <a href="{% url 'user_profile:profile_detail' profile.pk %}">Повернутися до профілю</a>
 {% endblock %}
