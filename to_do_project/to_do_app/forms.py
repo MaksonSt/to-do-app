@@ -21,12 +21,13 @@ class TaskForm(forms.ModelForm):
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'reg', 'placeholder': 'Email field'}))
-    name = forms.CharField(max_length=45, required=True, widget=forms.TextInput(attrs={'class': 'reg', 'placeholder': 'Name'}))
+    first_name = forms.CharField(max_length=45, required=True, widget=forms.TextInput(attrs={'class': 'reg', 'placeholder': 'First name'}))
+    last_name = forms.CharField(max_length=45, required=True, widget=forms.TextInput(attrs={'class': 'reg', 'placeholder': 'Last name'}))
     password1 = forms.CharField(max_length=50, required=True, widget=forms.PasswordInput(attrs={'class': 'reg', 'placeholder': 'Password'}))
     password2 = forms.CharField(max_length=50, required=True, widget=forms.PasswordInput(attrs={'class': 'reg', 'placeholder': 'Repeat Password'}))
     class Meta:
         model = User
-        fields = ['name', 'email','password1' , 'password2']
+        fields = ['first_name','last_name', 'email','password1' , 'password2']
 
     def clean(self):
         cleaned_data = super().clean()

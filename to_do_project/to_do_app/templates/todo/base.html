@@ -37,7 +37,7 @@
 
                 <div class="d-flex">
                     {% if user.is_authenticated %}
-                        <span class="welcome_user">Вітаю, {{ user.name }}!</span>
+                        <span class="welcome_user">Вітаю, {{ user.first_name }}!</span>
                         <form action="{% url 'to_do_app:logout' %}" method="post" class="d-inline">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-outline-light me-2">Вийти</button>
