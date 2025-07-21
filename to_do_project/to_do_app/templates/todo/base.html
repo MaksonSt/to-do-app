@@ -40,6 +40,8 @@
                         <span class="welcome_user">Вітаю, {{ user.first_name }}!</span>
                         {% if user_avatar %}
                             <img src="{{ user_avatar.url }}" alt="Avatar" class="user-avatar">
+                        {% else %}
+                            <img src="{% static 'todo/images/default-avatar.png' %}" alt="Default Avatar" class="user-avatar">
                         {% endif %}
                         <form action="{% url 'to_do_app:logout' %}" method="post" class="d-inline">
                             {% csrf_token %}
