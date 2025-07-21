@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .models import Task, CustomUser
 from .forms import TaskForm, RegistrationForm, ResetPasswordForm, TaskSearchForm, LoginForm
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, get_user_model
 from django.core.mail import send_mail
@@ -94,16 +95,18 @@ def register_user(request):
             user = form.save()
             user.save()
             login(request, user)
+            messages.success(request, f'You successfully register. Welcome {user.first_name}!', )
             return redirect('to_do_app:Home')
     else:
         form = RegistrationForm()
     return render(request, 'todo/register.html', {'form': form})
 
 
-class UserLoginView(LoginView):
+class UserLoginView(SuccessMessageMixin, LoginView):
     template_name = 'todo/login.html'
     authentication_form = LoginForm
     success_url = reverse_lazy(settings.LOGIN_REDIRECT_URL)
+    success_message = "You successfully Login! Welcome!"
 
 
 def send_email(request, email):

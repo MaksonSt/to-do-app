@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.utils.html import conditional_escape
-
+from django.contrib import messages
 from .forms import NameChangeForm
 from django.contrib.auth import get_user_model
 from django.contrib import messages
@@ -43,6 +43,7 @@ class UserProfileUpdateView(View):
         if form1.is_valid() and form2.is_valid():
             form1.save()
             form2.save()
+            messages.success(request, "Profile details updated.")
             return redirect('user_profile:profile_detail', pk=pk)
 
         return render(request, 'userprofile/update_profile.html', {'form1': form1, 'form2': form2})
