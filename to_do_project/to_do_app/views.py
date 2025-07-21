@@ -103,7 +103,7 @@ def register_user(request):
 class UserLoginView(LoginView):
     template_name = 'todo/login.html'
     authentication_form = LoginForm
-    success_url = reverse_lazy('to_do_app:Home')
+    success_url = reverse_lazy(settings.LOGIN_REDIRECT_URL)
 
 
 def send_email(request, email):
