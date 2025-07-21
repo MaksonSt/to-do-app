@@ -48,18 +48,4 @@ class UserProfileUpdateView(View):
         return render(request, 'userprofile/update_profile.html', {'form1': form1, 'form2': form2})
 
 
-# def change_name(request):
-#     user = request.user
-#     if request.method == 'POST':
-#         form = NameChangeForm(request.POST)
-#         if form.is_valid():
-#             user.name = form.cleaned_data['new_name']
-#             messages.info(request, "The name has been changed.")
-#             user.save()
-#             return redirect('to_do_app:Home')
-#     else:
-#         form = NameChangeForm(initial={'new_name': user.name})
-#     return render(request, 'userprofile/profile.html', {'form': form})
-
-
 
