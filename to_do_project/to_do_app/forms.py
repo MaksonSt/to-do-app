@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import get_user_model
 from .models import Task
 
@@ -50,3 +50,9 @@ class ResetPasswordForm(forms.Form):
 
 class TaskSearchForm(forms.Form):
     query = forms.CharField(max_length=200, required=False, label="Пошук за назвою", widget=forms.TextInput(attrs={'class': 'searching'}))
+
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'input-login', 'placeholder': 'Enter email'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input-login', 'placeholder': 'Enter password'}))
