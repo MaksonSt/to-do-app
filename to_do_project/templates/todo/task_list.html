@@ -1,62 +1,71 @@
 {% extends 'todo/base.html' %}
 
-{% block title %}To-Do List{% endblock %}
+{% block title %}To-Do Tasks & Lists{% endblock %}
 
 {% block content %}
-<div class="task-list container">
+<div class="container task-list">
     <h1 class="text-center mb-4">To-Do List</h1>
-
-    <form method="GET" action="{% url 'to_do_app:search_task' %}" class="mb-4">
-        <div class="input-group">
-            {{ form.query }}
-            <button class="btn btn-outline-primary" type="submit">Search</button>
-        </div>
-    </form>
 
     <div class="task-actions mb-3">
         <a href="{% url 'to_do_app:add_task' %}" class="btn btn-primary btn-sm me-2">Add New Task</a>
+        <a href="{% url 'to_do_app:create_tasks_list' %}" class="btn btn-success btn-sm me-2">Add New List</a>
         <a href="{% url 'to_do_app:Home' %}" class="btn btn-outline-danger btn-sm">Home page</a>
     </div>
 
-    {% for task in tasks %}
-<article class="task-item d-flex justify-content-between align-items-start mb-3 p-3 border rounded">
-    <div>
-        <h2 class="task-title mb-1">{{ task.task_name }}</h2>
-        <p class="task-description mb-1">{{ task.description }}</p>
+    <h3 class="mt-4">Tasks: </h3>
+    {% if tasks %}
+        {% for task in tasks %}
+            <article class="task-item d-flex justify-content-between align-items-start mb-3 p-3 border rounded">
+                <div>
+                    <h4 class="task-title mb-1">{{ task.task_name }}</h4>
+                    <p class="task-description mb-1">{{ task.description }}</p>
 
-        {% if task.tags.exists %}
-        <p class="task-tags mb-1">
-            <strong>Tags:</strong>
-            {% for tag in task.tags.all %}
-                <span class="badge bg-secondary me-1">{{ tag.name }}</span>
-            {% empty %}
-                No tags
-            {% endfor %}
-        </p>
-        {% endif %}
+                    {% if task.tags.exists %}
+                    <p class="task-tags mb-1">
+                        <strong>Tags:</strong>
+                        {% for tag in task.tags.all %}
+                            <span class="badge bg-secondary me-1">{{ tag.name }}</span>
+                        {% endfor %}
+                    </p>
+                    {% endif %}
 
-        {% if task.due_date %}
-            <small class="text-muted">Due: {{ task.due_date|date:"d M Y, H:i" }}</small>
-        {% endif %}
+                    {% if task.due_date %}
+                        <small class="text-muted">Due: {{ task.due_date|date:"d M Y, H:i" }}</small>
+                    {% endif %}
 
-        {% if task.complete %}
-            <div class="mt-2">
-                <span class="badge bg-success">Completed</span>
-                <a href="{% url 'to_do_app:task_complete' task.pk %}" class="btn btn-sm btn-outline-info ms-2">Mark as Uncompleted</a>
-            </div>
-        {% else %}
-            <div class="mt-2">
-                <a href="{% url 'to_do_app:task_complete' task.pk %}" class="btn btn-sm btn-success">Mark as Completed</a>
-            </div>
-        {% endif %}
-    </div>
-    <div class="task-actions d-flex flex-column gap-2">
-        <a href="{% url 'to_do_app:update_task' task.pk %}" class="btn btn-outline-warning btn-sm">Update task</a>
-        <a href="{% url 'to_do_app:delete_task' task.pk %}" class="btn btn-outline-danger btn-sm">Delete task</a>
-    </div>
-</article>
-{% empty %}
-    <p class="text-center">No tasks available. Start by adding a task!</p>
-{% endfor %}
+                    {% if task.complete %}
+                        <div class="mt-2">
+                            <span class="badge bg-success">Completed</span>
+                            <a href="{% url 'to_do_app:task_complete' task.pk %}" class="btn btn-sm btn-outline-info ms-2">Mark as Uncompleted</a>
+                        </div>
+                    {% else %}
+                        <div class="mt-2">
+                            <a href="{% url 'to_do_app:task_complete' task.pk %}" class="btn btn-sm btn-success">Mark as Completed</a>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="task-actions d-flex flex-column gap-2">
+                    <a href="{% url 'to_do_app:update_task' task.pk %}" class="btn btn-outline-warning btn-sm">Update task</a>
+                    <a href="{% url 'to_do_app:delete_task' task.pk %}" class="btn btn-outline-danger btn-sm">Delete task</a>
+                </div>
+            </article>
+        {% endfor %}
+    {% else %}
+        <p>No tasks without a list.</p>
+    {% endif %}
+
+
+    <h3 class="mt-5">Task Lists: </h3>
+    {% if tasklists %}
+    <ul class="list-group">
+        {% for tasklist in tasklists %}
+            <li class="list-group-item">
+                {{ tasklist.name }}
+            </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>No lists available.</p>
+    {% endif %}
 </div>
 {% endblock %}

@@ -3,7 +3,7 @@ from .models import Task, CustomUser
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('task_name', 'description', 'data_added', 'complete', 'category', 'display_tags')
+    list_display = ('task_name', 'description', 'data_added', 'complete', 'display_tags')
 
     def display_tags(self, obj):
         return ", ".join(tag.name for tag in obj.tags.all())

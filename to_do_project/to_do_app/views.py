@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
-from .models import Task, CustomUser
-from .forms import TaskForm, RegistrationForm, ResetPasswordForm, TaskSearchForm, LoginForm
+from .models import Task, CustomUser, ListOfTasks
+from .forms import TaskForm, RegistrationForm, ResetPasswordForm, TaskSearchForm, LoginForm, ListTasksForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, get_user_model
@@ -44,7 +44,8 @@ def home(request):
 @login_required_message(login_url='to_do_app:login')
 def task_list(request):
     tasks = Task.objects.all()
-    return render(request, 'todo/task_list.html', {'tasks': tasks})
+    tasklists = ListOfTasks.objects.all()
+    return render(request, 'todo/task_list.html', {'tasks': tasks, 'tasklists': tasklists})
 
 
 @login_required_message(login_url='to_do_app:login')
@@ -194,4 +195,16 @@ def faqs(request):
 
 def features(request):
     return render(request, "todo/features.html")
+
+
+def create_list_of_tasks(request):
+    if request.method == 'POST':
+        form = ListTasksForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('to_do_app:task-list')
+    else:
+        form = ListTasksForm()
+    return render(request, 'todo/create_task_list.html', {'form': form})
+
 

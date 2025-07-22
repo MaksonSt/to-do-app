@@ -18,19 +18,38 @@ class Tags(models.Model):
         return self.name
 
 
+
 class Task(models.Model):
     task_name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     data_added = models.DateField(auto_now_add=True)
     due_date = models.DateTimeField(null=True, blank=True)
     complete = models.BooleanField(default=False)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     tags = models.ManyToManyField(Tags, blank=True)
 
 
 
     def __str__(self):
         return self.task_name
+
+
+
+class ListOfTasks(models.Model):
+    name = models.CharField(max_length=50)
+    tasks = models.ManyToManyField(Task, blank=True)
+
+    @property
+    def get_success(self, values):
+        total_tasks = self.tasks.count()
+        if total_tasks == 0:
+            return 0
+        tasks_complete = self.tasks.filter(complete=True).count()
+        return (tasks_complete * total_tasks) // 100
+
+
+    def __str__(self):
+        return self.name
+
 
 
 
