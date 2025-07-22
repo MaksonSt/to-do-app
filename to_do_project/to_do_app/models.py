@@ -3,12 +3,31 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.db.models import EmailField
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+
+    def __str__(self):
+        return self.name
+
+
+class Tags(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Task(models.Model):
     task_name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     data_added = models.DateField(auto_now_add=True)
     due_date = models.DateTimeField(null=True, blank=True)
     complete = models.BooleanField(default=False)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    tags = models.ManyToManyField(Tags, blank=True)
+
+
 
     def __str__(self):
         return self.task_name

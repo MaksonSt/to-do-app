@@ -1,22 +1,26 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import get_user_model
-from .models import Task
+from .models import Task, Tags, Category
 
 User = get_user_model()
 
+
 class TaskForm(forms.ModelForm):
+    tags = forms.ModelMultipleChoiceField(
+        queryset=Tags.objects.all(),
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'task'}),
+        required=False,
+    )
+
     class Meta:
         model = Task
-        fields = ['task_name', 'description', 'due_date']
-
+        fields = ['task_name', 'description', 'due_date', 'tags']
         widgets = {
             'task_name': forms.TextInput(attrs={'class': 'task', 'placeholder': 'Task name'}),
-            'description': forms.Textarea(attrs={'class': 'task', 'placeholder': 'Description name'}),
+            'description': forms.Textarea(attrs={'class': 'task', 'placeholder': 'Description'}),
             'due_date': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'task', 'placeholder': 'Deadline'}),
-
         }
-
 
 
 class RegistrationForm(UserCreationForm):
