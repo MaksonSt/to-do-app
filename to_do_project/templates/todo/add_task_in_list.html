@@ -1,0 +1,30 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Add New Task{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Add New Task to List: {{ tasklist.name }}</h1>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="mb-3">
+            <label for="id_task_name" class="form-label">Task Name</label>
+            {{ form.task_name.errors }}
+            {{ form.task_name }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_description" class="form-label">Description</label>
+            {{ form.description.errors }}
+            {{ form.description }}
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Add Task</button>
+        <a href="{% url 'to_do_app:menu_list_task' tasklist.pk %}" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Task List: {{ tasklist.name }}{% endblock %}
+
+{% block content %}
+<div class="container task-list-detail">
+    <h1 class="text-center mb-4">Task List: {{ tasklist.name }}</h1>
+
+    <div class="task-actions mb-3">
+        <a href="{% url 'to_do_app:add_task_to_list' tasklist.pk%}  " class="btn btn-primary btn-sm me-2">Add New Task</a>
+        <a href="{% url 'to_do_app:delete_list' tasklist.pk %}" class="btn btn-danger btn-sm me-2">Delete List</a>
+        <a href="{% url 'to_do_app:Home' %}" class="btn btn-outline-secondary btn-sm">Home</a>
+    </div>
+
+    {% if tasks %}
+        <h3>Tasks in this List:</h3>
+        {% for task in tasks %}
+            <article class="task-item d-flex justify-content-between align-items-start mb-3 p-3 border rounded">
+                <div>
+                    <h4 class="task-title mb-1">{{ task.task_name }}</h4>
+                    <p class="task-description mb-1">{{ task.description }}</p>
+
+                    {% if task.tags.exists %}
+                    <p class="task-tags mb-1">
+                        <strong>Tags:</strong>
+                        {% for tag in task.tags.all %}
+                            <span class="badge bg-secondary me-1">{{ tag.name }}</span>
+                        {% endfor %}
+                    </p>
+                    {% endif %}
+
+                    {% if task.due_date %}
+                        <small class="text-muted">Due: {{ task.due_date|date:"d M Y, H:i" }}</small>
+                    {% endif %}
+
+                    {% if task.complete %}
+                        <div class="mt-2">
+                            <span class="badge bg-success">Completed</span>
+                            <a href="{% url 'to_do_app:task_complete_in_list' task.pk %}" class="btn btn-sm btn-outline-info ms-2">Mark as Uncompleted</a>
+                        </div>
+                    {% else %}
+                        <div class="mt-2">
+                            <a href="{% url 'to_do_app:task_complete_in_list' task.pk %}" class="btn btn-sm btn-success">Mark as Completed</a>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="task-actions d-flex flex-column gap-2">
+                    <a href="{% url 'to_do_app:update_list_task' task.pk %}" class="btn btn-outline-warning btn-sm">Update Task</a>
+                    <a href="{% url 'to_do_app:delete_task_from_list' task.pk %}" class="btn btn-outline-danger btn-sm">Delete Task</a>
+                </div>
+            </article>
+        {% endfor %}
+    {% else %}
+        <p>No tasks in this list yet.</p>
+    {% endif %}
+</div>
+{% endblock %}
