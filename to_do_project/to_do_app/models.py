@@ -18,6 +18,21 @@ class Tags(models.Model):
         return self.name
 
 
+class ListOfTasks(models.Model):
+    name = models.CharField(max_length=50)
+
+    @property
+    def success_percentage(self):
+        total_tasks = self.tasks.count()
+        if total_tasks == 0:
+            return 0
+        tasks_complete = self.tasks.filter(complete=True).count()
+        return round((tasks_complete / total_tasks) * 100, 1)
+
+
+    def __str__(self):
+        return self.name
+
 
 class Task(models.Model):
     task_name = models.CharField(max_length=255)
@@ -26,7 +41,7 @@ class Task(models.Model):
     due_date = models.DateTimeField(null=True, blank=True)
     complete = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tags, blank=True)
-
+    list = models.ForeignKey(ListOfTasks, on_delete=models.CASCADE, related_name='tasks', null=True, blank=True)
 
 
     def __str__(self):
@@ -34,21 +49,6 @@ class Task(models.Model):
 
 
 
-class ListOfTasks(models.Model):
-    name = models.CharField(max_length=50)
-    tasks = models.ManyToManyField(Task, blank=True)
-
-    @property
-    def get_success(self, values):
-        total_tasks = self.tasks.count()
-        if total_tasks == 0:
-            return 0
-        tasks_complete = self.tasks.filter(complete=True).count()
-        return (tasks_complete * total_tasks) // 100
-
-
-    def __str__(self):
-        return self.name
 
 
 

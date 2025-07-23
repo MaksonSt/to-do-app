@@ -57,13 +57,23 @@
 
     <h3 class="mt-5">Task Lists: </h3>
     {% if tasklists %}
-    <ul class="list-group">
-        {% for tasklist in tasklists %}
-            <li class="list-group-item">
-                {{ tasklist.name }}
-            </li>
-        {% endfor %}
-    </ul>
+        <ul class="list-group">
+            {% for tasklist in tasklists %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="{% url 'to_do_app:menu_list_task' tasklist.pk %}">
+                        {{ tasklist.name }}
+                    </a>
+                    <div>
+                        <span class="badge bg-success me-2">
+                            {{ tasklist.success_percentage }}%
+                        </span>
+                        <span class="badge bg-primary rounded-pill">
+                            {{ tasklist.tasks.count }}
+                        </span>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
     {% else %}
         <p>No lists available.</p>
     {% endif %}

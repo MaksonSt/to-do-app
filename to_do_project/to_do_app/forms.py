@@ -27,10 +27,9 @@ class TaskForm(forms.ModelForm):
 class ListTasksForm(forms.ModelForm):
     class Meta:
         model = ListOfTasks
-        fields = ['name', 'tasks']
+        fields = ['name']
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'task-list', 'placeholder': 'Enter name of list of task'}),
-            'tasks': forms.CheckboxSelectMultiple(attrs={'class': 'task-list'})
+            'name': forms.TextInput(attrs={'class': 'task-list', 'placeholder': 'Enter name of list of task'})
         }
 
 
