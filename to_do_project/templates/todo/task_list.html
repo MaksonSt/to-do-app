@@ -8,7 +8,7 @@
 
     <div class="task-actions mb-3">
         <a href="{% url 'to_do_app:add_task' %}" class="btn btn-primary btn-sm me-2">Add New Task</a>
-        <a href="{% url 'to_do_app:create_tasks_list' %}" class="btn btn-success btn-sm me-2">Add New List</a>
+        <a href="{% url 'todo_lists:create_tasks_list' %}" class="btn btn-success btn-sm me-2">Add New List</a>
         <a href="{% url 'to_do_app:Home' %}" class="btn btn-outline-danger btn-sm">Home page</a>
     </div>
 
@@ -60,7 +60,7 @@
         <ul class="list-group">
             {% for tasklist in tasklists %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a href="{% url 'to_do_app:menu_list_task' tasklist.pk %}">
+                    <a href="{% url 'todo_lists:menu_list_task' tasklist.pk %}">
                         {{ tasklist.name }}
                     </a>
                     <div>

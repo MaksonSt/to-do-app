@@ -1,10 +1,10 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import get_user_model
-from .models import Task, Tags, ListOfTasks
+from .models import Task, Tags
+
 
 User = get_user_model()
-
 
 class TaskForm(forms.ModelForm):
     tags = forms.ModelMultipleChoiceField(
@@ -20,16 +20,6 @@ class TaskForm(forms.ModelForm):
             'task_name': forms.TextInput(attrs={'class': 'task', 'placeholder': 'Task name'}),
             'description': forms.Textarea(attrs={'class': 'task', 'placeholder': 'Description'}),
             'due_date': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'task', 'placeholder': 'Deadline'}),
-        }
-
-
-
-class ListTasksForm(forms.ModelForm):
-    class Meta:
-        model = ListOfTasks
-        fields = ['name']
-        widgets = {
-            'name': forms.TextInput(attrs={'class': 'task-list', 'placeholder': 'Enter name of list of task'})
         }
 
 

@@ -25,4 +25,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("to_do_app.urls", namespace="to_do_app")),
     path('profile/', include("user_profile.urls", namespace="user_profile")),
+    path('todo_lists/', include("todo_lists.urls", namespace="todo_lists")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
