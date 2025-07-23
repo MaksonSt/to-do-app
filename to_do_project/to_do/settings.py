@@ -49,6 +49,8 @@ INSTALLED_APPS = [
 
     'to_do_app',
     'user_profile.apps.UserProfileConfig',
+    'todo_lists',
+
 ]
 
 MIDDLEWARE = [

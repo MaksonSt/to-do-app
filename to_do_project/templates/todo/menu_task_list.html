@@ -7,8 +7,8 @@
     <h1 class="text-center mb-4">Task List: {{ tasklist.name }}</h1>
 
     <div class="task-actions mb-3">
-        <a href="{% url 'to_do_app:add_task_to_list' tasklist.pk%}  " class="btn btn-primary btn-sm me-2">Add New Task</a>
-        <a href="{% url 'to_do_app:delete_list' tasklist.pk %}" class="btn btn-danger btn-sm me-2">Delete List</a>
+        <a href="{% url 'todo_lists:add_task_to_list' tasklist.pk %}  " class="btn btn-primary btn-sm me-2">Add New Task</a>
+        <a href="{% url 'todo_lists:delete_list' tasklist.pk %}" class="btn btn-danger btn-sm me-2">Delete List</a>
         <a href="{% url 'to_do_app:Home' %}" class="btn btn-outline-secondary btn-sm">Home</a>
     </div>
 
@@ -36,17 +36,17 @@
                     {% if task.complete %}
                         <div class="mt-2">
                             <span class="badge bg-success">Completed</span>
-                            <a href="{% url 'to_do_app:task_complete_in_list' task.pk %}" class="btn btn-sm btn-outline-info ms-2">Mark as Uncompleted</a>
+                            <a href="{% url 'todo_lists:task_complete_in_list' task.pk %}" class="btn btn-sm btn-outline-info ms-2">Mark as Uncompleted</a>
                         </div>
                     {% else %}
                         <div class="mt-2">
-                            <a href="{% url 'to_do_app:task_complete_in_list' task.pk %}" class="btn btn-sm btn-success">Mark as Completed</a>
+                            <a href="{% url 'todo_lists:task_complete_in_list' task.pk %}" class="btn btn-sm btn-success">Mark as Completed</a>
                         </div>
                     {% endif %}
                 </div>
                 <div class="task-actions d-flex flex-column gap-2">
-                    <a href="{% url 'to_do_app:update_list_task' task.pk %}" class="btn btn-outline-warning btn-sm">Update Task</a>
-                    <a href="{% url 'to_do_app:delete_task_from_list' task.pk %}" class="btn btn-outline-danger btn-sm">Delete Task</a>
+                    <a href="{% url 'todo_lists:update_list_task' task.pk %}" class="btn btn-outline-warning btn-sm">Update Task</a>
+                    <a href="{% url 'todo_lists:delete_task_from_list' task.pk %}" class="btn btn-outline-danger btn-sm">Delete Task</a>
                 </div>
             </article>
         {% endfor %}
