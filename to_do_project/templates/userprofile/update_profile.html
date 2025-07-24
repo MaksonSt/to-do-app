@@ -1,0 +1,14 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+  <h1>Редагування профілю</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form1.as_p }}
+    {{ form2.as_p }}
+    <button type="submit">Оновити</button>
+</form>
+
+  <a href="{% url 'user_profile:profile_detail' profile.pk %}">Повернутися до профілю</a>
+{% endblock %}
