@@ -316,6 +316,7 @@ main {
   user-select: none;
 }
 
+
 /* Щоб зробити чекбокси і радіо більш помітними */
 .task input[type="checkbox"],
 .task input[type="radio"] {
