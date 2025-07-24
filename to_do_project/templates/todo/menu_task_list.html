@@ -9,6 +9,7 @@
     <div class="task-actions mb-3">
         <a href="{% url 'todo_lists:add_task_to_list' tasklist.pk %}  " class="btn btn-primary btn-sm me-2">Add New Task</a>
         <a href="{% url 'todo_lists:delete_list' tasklist.pk %}" class="btn btn-danger btn-sm me-2">Delete List</a>
+        <a href="{% url 'to_do_app:task-list'%}" class="btn btn-danger btn-sm me-2">Back to Task Page</a>
         <a href="{% url 'to_do_app:Home' %}" class="btn btn-outline-secondary btn-sm">Home</a>
     </div>
 
