@@ -323,6 +323,7 @@ main {
   height: 18px;
 }
 
+
 /* Підсвічування при наведенні */
 .task input[type="checkbox"]:hover,
 .task input[type="radio"]:hover {
