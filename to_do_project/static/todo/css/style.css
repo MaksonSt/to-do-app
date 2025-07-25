@@ -316,11 +316,13 @@ main {
   user-select: none;
 }
 
+
 .task input[type=checkbox],
 .task input[type=radio] {
   width: 18px;
   height: 18px;
 }
+
 
 .task input[type=checkbox]:hover,
 .task input[type=radio]:hover {
