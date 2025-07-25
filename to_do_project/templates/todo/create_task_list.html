@@ -1,0 +1,15 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Add Task List{% endblock %}
+
+{% block content %}
+    <div class="add-task-list-form">
+        <h1 class="text-center mb-4">Add New Task List</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Create Task List</button>
+        </form>
+        <a href="{% url 'to_do_app:task-list' %}" class="btn btn-link">Back to Task List</a>
+    </div>
+{% endblock %}

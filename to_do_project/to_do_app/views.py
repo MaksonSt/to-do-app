@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .models import Task, CustomUser
-from .forms import TaskForm, RegistrationForm, ResetPasswordForm, TaskSearchForm
+from .forms import TaskForm, RegistrationForm, ResetPasswordForm, TaskSearchForm, LoginForm
+from todo_lists.models import ListOfTasks
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, get_user_model
 from django.core.mail import send_mail
@@ -13,6 +15,8 @@ from django.conf import settings
 from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
 
 User = get_user_model()
 
@@ -40,8 +44,13 @@ def home(request):
 
 @login_required_message(login_url='to_do_app:login')
 def task_list(request):
-    tasks = Task.objects.all()
-    return render(request, 'todo/task_list.html', {'tasks': tasks})
+    tasks = Task.objects.filter(list__isnull=True)
+    tasklists = ListOfTasks.objects.all()
+    return render(request, 'todo/task_list.html', {'tasks': tasks, 'tasklists': tasklists})
+
+
+
+
 
 
 @login_required_message(login_url='to_do_app:login')
@@ -62,6 +71,8 @@ def complete_task(request, pk):
     task.complete = not task.complete
     task.save()
     return redirect('to_do_app:task-list')
+
+
 
 
 @login_required_message(login_url='to_do_app:login')
@@ -92,10 +103,18 @@ def register_user(request):
             user = form.save()
             user.save()
             login(request, user)
+            messages.success(request, f'You successfully register. Welcome {user.first_name}!', )
             return redirect('to_do_app:Home')
     else:
         form = RegistrationForm()
     return render(request, 'todo/register.html', {'form': form})
+
+
+class UserLoginView(SuccessMessageMixin, LoginView):
+    template_name = 'todo/login.html'
+    authentication_form = LoginForm
+    success_url = reverse_lazy(settings.LOGIN_REDIRECT_URL)
+    success_message = "You successfully Login! Welcome!"
 
 
 def send_email(request, email):

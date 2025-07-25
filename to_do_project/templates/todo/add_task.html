@@ -8,7 +8,6 @@
   <form method="POST" class="task-form">
     {% csrf_token %}
     {{ form.as_p }}
-
     <button type="submit" class="btn">💾 Зберегти</button>
     <a href="{% url 'to_do_app:Home' %}" class="btn cancel">↩ Назад</a>
   </form>

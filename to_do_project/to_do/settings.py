@@ -49,6 +49,8 @@ INSTALLED_APPS = [
 
     'to_do_app',
     'user_profile.apps.UserProfileConfig',
+    'todo_lists',
+
 ]
 
 MIDDLEWARE = [
@@ -73,6 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'to_do_app.context_processors.user_avatar',
             ],
         },
     },
@@ -139,7 +142,10 @@ EMAIL_USE_TLS = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
