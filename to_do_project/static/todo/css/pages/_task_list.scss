@@ -1,0 +1,91 @@
+.task {
+  margin: 8px 0;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+
+.task input[type="checkbox"],
+.task input[type="radio"] {
+  margin-right: 8px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.task label {
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+.task input[type="checkbox"],
+.task input[type="radio"] {
+  width: 18px;
+  height: 18px;
+}
+
+.task input[type="checkbox"]:hover,
+.task input[type="radio"]:hover {
+  outline: 2px solid #007BFF;
+  outline-offset: 2px;
+}
+
+.task-sidebar{
+  width: 240px;
+  height: 100%;
+  background-color: #1f2937;
+  padding: 10px;
+  display:  flex;
+  flex-flow: column ;
+  gap: 10px;
+  position: sticky;
+  top: 0;
+}
+
+.task-list{
+  display: flex;
+  min-height: 80vh;
+}
+.main_flex_container{
+  flex: 1;
+  background-color: #f9fafb;
+  padding: 40px;
+}
+.task-actions-tasks{
+  display: flex;
+  flex-flow:column;
+  gap:20px;
+}
+.align-items-start{
+align-items: center !important;
+}
+
+
+  .mt-2{
+    display: flex;
+    flex-flow: row;
+    gap:10px;
+  }
+.bg-success{
+  align-items: center;
+  padding: 4%;
+}
+
+.mt-5{
+  color: white;
+}
+.badge-container{
+  display: flex;
+  flex-flow: row;
+  gap:10px;
+}
+.search_form{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+.search_container{
+  display: flex;
+  justify-content: flex-start;
+}

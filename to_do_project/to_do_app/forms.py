@@ -54,7 +54,7 @@ class ResetPasswordForm(forms.Form):
 
 
 class TaskSearchForm(forms.Form):
-    query = forms.CharField(max_length=200, required=False, label="Пошук за назвою", widget=forms.TextInput(attrs={'class': 'searching'}))
+    query = forms.CharField(max_length=200, required=False, label="Пошук за назвою", widget=forms.TextInput(attrs={'class': 'searching', 'placeholder':'search'}))
 
 
 

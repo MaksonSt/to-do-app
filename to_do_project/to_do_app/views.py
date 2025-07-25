@@ -46,7 +46,14 @@ def home(request):
 def task_list(request):
     tasks = Task.objects.filter(list__isnull=True)
     tasklists = ListOfTasks.objects.all()
-    return render(request, 'todo/task_list.html', {'tasks': tasks, 'tasklists': tasklists})
+    form = TaskSearchForm(request.GET or None)
+    context = {
+            'form' : form,
+            'tasks' : tasks,
+            'tasklists' : tasklists
+        }
+
+    return render(request, 'todo/task_list.html', context)
 
 
 
@@ -178,6 +185,7 @@ def password_reset_request(request):
 def search_task(request):
     form = TaskSearchForm(request.GET or None)
     tasks = Task.objects.all()
+    tasklists = ListOfTasks.objects.all()
 
     if form.is_valid() and form.cleaned_data['query']:
         query = form.cleaned_data['query']
@@ -185,7 +193,8 @@ def search_task(request):
 
     context = {
         'form' : form,
-        'tasks' : tasks
+        'tasks' : tasks,
+        'tasklists' : tasklists
     }
 
     return render(request, 'todo/task_list.html', context)
