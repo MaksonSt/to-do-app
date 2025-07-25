@@ -68,11 +68,13 @@ body {
   background-color: #f7f7f7;
 }
 
-.header {
+.navbar {
   text-align: center;
   color: black;
   font-weight: 500;
   padding-bottom: 0.5rem;
+  position: sticky;
+  top: 0;
 }
 
 .welcome_user {
@@ -86,8 +88,16 @@ body {
   gap: 10px;
 }
 
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .btn {
   width: 100%;
+  height: 36px;
   gap: 1rem;
   font-size: 1rem;
   background-color: #007bff;
@@ -285,15 +295,6 @@ main {
   padding-top: 1rem;
 }
 
-/*# sourceMappingURL=style.css.map */
-
-.user-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
 .task {
   margin: 8px 0;
   cursor: pointer;
@@ -302,31 +303,94 @@ main {
   color: #333;
 }
 
-/* Відступ між чекбоксами/радіокнопками */
-.task input[type="checkbox"],
-.task input[type="radio"] {
+.task input[type=checkbox],
+.task input[type=radio] {
   margin-right: 8px;
   cursor: pointer;
   vertical-align: middle;
 }
 
-/* Кастомний вигляд чекбоксів і радіо (прості) */
 .task label {
   display: flex;
   align-items: center;
   user-select: none;
 }
 
-/* Щоб зробити чекбокси і радіо більш помітними */
-.task input[type="checkbox"],
-.task input[type="radio"] {
+.task input[type=checkbox],
+.task input[type=radio] {
   width: 18px;
   height: 18px;
 }
 
-/* Підсвічування при наведенні */
-.task input[type="checkbox"]:hover,
-.task input[type="radio"]:hover {
+.task input[type=checkbox]:hover,
+.task input[type=radio]:hover {
   outline: 2px solid #007BFF;
   outline-offset: 2px;
 }
+
+.task-sidebar {
+  width: 240px;
+  height: 100%;
+  background-color: #1f2937;
+  padding: 10px;
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+  position: sticky;
+  top: 0;
+}
+
+.task-list {
+  display: flex;
+  min-height: 80vh;
+}
+
+.main_flex_container {
+  flex: 1;
+  background-color: #f9fafb;
+  padding: 40px;
+}
+
+.task-actions-tasks {
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
+}
+
+.align-items-start {
+  align-items: center !important;
+}
+
+.mt-2 {
+  display: flex;
+  flex-flow: row;
+  gap: 10px;
+}
+
+.bg-success {
+  align-items: center;
+  padding: 4%;
+}
+
+.mt-5 {
+  color: white;
+}
+
+.badge-container {
+  display: flex;
+  flex-flow: row;
+  gap: 10px;
+}
+
+.search_form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.search_container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/*# sourceMappingURL=style.css.map */
