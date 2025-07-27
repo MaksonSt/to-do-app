@@ -11,7 +11,7 @@
         <a href="{% url 'todo_lists:create_tasks_list' %}" class="btn btn-success btn-sm me-2">Add New List</a>
         <a href="{% url 'to_do_app:Home' %}" class="btn btn-outline-danger btn-sm">Home page</a>
 <!--        Categories-->
-        <h3 class="mt-5">Task Lists: </h3>
+        <h3 class="task-list-text">Task Lists: </h3>
         {% if tasklists %}
         <ul class="list-group">
             {% for tasklist in tasklists %}

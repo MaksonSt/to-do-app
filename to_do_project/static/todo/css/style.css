@@ -95,6 +95,10 @@ body {
   object-fit: cover;
 }
 
+.mt-5 {
+  color: black;
+}
+
 .btn {
   width: 100%;
   height: 36px;
@@ -295,6 +299,88 @@ main {
   padding-top: 1rem;
 }
 
+.plus {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+  width: 70%;
+  flex-flow: column;
+}
+
+.add_task_container {
+  margin: 0 auto;
+  width: 60%;
+  background-color: white;
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.task_name_input {
+  width: 95%;
+  padding: 10px;
+  margin: 20px;
+}
+
+.task_description_input {
+  width: 95%;
+  padding: 25px;
+  margin: 20px;
+}
+
+.due_date {
+  margin: 20px;
+  padding: 12px 14px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #333;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group-inline {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.tag-select {
+  text-align: center;
+  display: inline-block;
+  width: 100px;
+  height: 50px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #333;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn_add_task {
+  height: 36px;
+  align-items: center;
+  padding: 0 40px;
+  font-size: 1rem;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.5s;
+  white-space: nowrap;
+  margin: 0 auto;
+}
+
+.btn_add_task_container {
+  display: flex;
+  flex-flow: row;
+}
+
 .task {
   margin: 8px 0;
   cursor: pointer;
@@ -316,13 +402,11 @@ main {
   user-select: none;
 }
 
-
 .task input[type=checkbox],
 .task input[type=radio] {
   width: 18px;
   height: 18px;
 }
-
 
 .task input[type=checkbox]:hover,
 .task input[type=radio]:hover {
@@ -374,10 +458,6 @@ main {
   padding: 4%;
 }
 
-.mt-5 {
-  color: white;
-}
-
 .badge-container {
   display: flex;
   flex-flow: row;
@@ -393,6 +473,10 @@ main {
 .search_container {
   display: flex;
   justify-content: flex-start;
+}
+
+.task-list-text {
+  color: white;
 }
 
 /*# sourceMappingURL=style.css.map */
