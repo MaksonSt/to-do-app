@@ -18,19 +18,6 @@ class Tags(models.Model):
         return self.name
 
 
-class Task(models.Model):
-    task_name = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
-    data_added = models.DateField(auto_now_add=True)
-    due_date = models.DateTimeField(null=True, blank=True)
-    complete = models.BooleanField(default=False)
-    tags = models.ManyToManyField(Tags, blank=True, related_name='tasks')
-    list = models.ForeignKey(ListOfTasks, on_delete=models.CASCADE, related_name='tasks', null=True, blank=True)
-
-
-    def __str__(self):
-        return self.task_name
-
 
 
 
@@ -88,3 +75,17 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 
+
+class Task(models.Model):
+    task_name = models.CharField(max_length=255)
+    user = models.ForeignKey("CustomUser", on_delete=models.CASCADE)
+    description = models.CharField(max_length=255)
+    data_added = models.DateField(auto_now_add=True)
+    due_date = models.DateTimeField(null=True, blank=True)
+    complete = models.BooleanField(default=False)
+    tags = models.ManyToManyField(Tags, blank=True, related_name='tasks')
+    list = models.ForeignKey(ListOfTasks, on_delete=models.CASCADE, related_name='tasks', null=True, blank=True)
+
+
+    def __str__(self):
+        return self.task_name

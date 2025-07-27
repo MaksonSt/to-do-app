@@ -44,7 +44,7 @@ def home(request):
 
 @login_required_message(login_url='to_do_app:login')
 def task_list(request):
-    tasks = Task.objects.filter(list__isnull=True)
+    tasks = Task.objects.filter(list__isnull=True, user=request.user)
     tasklists = ListOfTasks.objects.all()
     form = TaskSearchForm(request.GET or None)
 
