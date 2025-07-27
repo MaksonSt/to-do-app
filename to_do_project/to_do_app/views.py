@@ -60,6 +60,8 @@ def task_list(request):
             tasks = tasks.order_by('complete')
         elif sort_param == 'data_added':
             tasks = tasks.order_by('data_added')
+        elif sort_param == 'alphabet':
+            tasks = tasks.order_by('task_name')
 
         #filters
         if filter_param == 'done':

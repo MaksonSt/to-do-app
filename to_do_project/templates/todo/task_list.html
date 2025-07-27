@@ -67,6 +67,7 @@
                 <option value="done" {% if request.GET.sort == 'done' %}selected{% endif %}>Виконані вгорі</option>
                 <option value="undone" {% if request.GET.sort == 'undone' %}selected{% endif %}>Невиконані вгорі</option>
                 <option value="data_added" {% if request.GET.sort == 'data_added' %}selected{% endif %}>За датою</option>
+                <option value="alphabet" {% if request.GET.sort == 'alphabet' %}selected{% endif %}>За алфавітом</option>
             </select>
 
             <!-- зберігаємо значення поточного фільтра -->
