@@ -47,6 +47,35 @@ def task_list(request):
     tasks = Task.objects.filter(list__isnull=True)
     tasklists = ListOfTasks.objects.all()
     form = TaskSearchForm(request.GET or None)
+
+    sort_param = request.GET.get('sort')
+    filter_param = request.GET.get('filters')
+
+    if request.GET:
+
+        # sorting
+        if sort_param == 'done':
+            tasks = tasks.order_by('-complete')
+        elif sort_param == 'undone':
+            tasks = tasks.order_by('complete')
+        elif sort_param == 'data_added':
+            tasks = tasks.order_by('data_added')
+
+        #filters
+        if filter_param == 'done':
+            tasks = tasks.filter(complete=True)
+        elif filter_param == 'undone':
+            tasks = tasks.filter(complete=False)
+
+        #searching
+        if form.is_valid():
+            query = form.cleaned_data.get('query')
+            if query:
+                tasks = tasks.filter(Q(task_name__icontains=query) | Q(description__icontains=query))
+            elif 'query' in request.GET:
+                messages.warning(request, "Поле для пошуку не може бути порожнім.")
+
+
     context = {
             'form' : form,
             'tasks' : tasks,
@@ -54,8 +83,6 @@ def task_list(request):
         }
 
     return render(request, 'todo/task_list.html', context)
-
-
 
 
 
@@ -180,24 +207,6 @@ def password_reset_request(request):
     return render(request, 'todo/email_form.html', {'form': form})
 
 
-
-@login_required_message(login_url='to_do_app:login')
-def search_task(request):
-    form = TaskSearchForm(request.GET or None)
-    tasks = Task.objects.all()
-    tasklists = ListOfTasks.objects.all()
-
-    if form.is_valid() and form.cleaned_data['query']:
-        query = form.cleaned_data['query']
-        tasks = tasks.filter(Q(task_name__icontains=query) | Q(description__icontains=query))
-
-    context = {
-        'form' : form,
-        'tasks' : tasks,
-        'tasklists' : tasklists
-    }
-
-    return render(request, 'todo/task_list.html', context)
 
 
 

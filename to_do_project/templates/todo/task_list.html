@@ -10,6 +10,17 @@
         <a href="{% url 'to_do_app:add_task' %}" class="btn btn-primary btn-sm me-2">Add New Task</a>
         <a href="{% url 'todo_lists:create_tasks_list' %}" class="btn btn-success btn-sm me-2">Add New List</a>
         <a href="{% url 'to_do_app:Home' %}" class="btn btn-outline-danger btn-sm">Home page</a>
+        <form method="get" action="{% url 'to_do_app:task-list' %}">
+            <label for="filters">Фільтр:</label>
+            <select name="filters" id="filters" onchange="this.form.submit()">
+                <option value="">-- Усі --</option>
+                <option value="done" {% if request.GET.filters == 'done' %}selected{% endif %}>Лише виконані</option>
+                <option value="undone" {% if request.GET.filters == 'undone' %}selected{% endif %}>Лише невиконані</option>
+            </select>
+
+            <!-- зберігаємо значення поточного сортування -->
+            <input type="hidden" name="sort" value="{{ request.GET.sort }}">
+        </form>
 <!--        Categories-->
         <h3 class="mt-5">Task Lists: </h3>
         {% if tasklists %}
@@ -35,16 +46,35 @@
         <p>No lists available.</p>
         {% endif %}
     </aside>
+
 <div class="main_flex_container">
     <div class="search_container">
-    <form method="GET" action="{% url 'to_do_app:search_task' %}" class="search_form" >
+
+        <!--        SEARCH -->
+    <form method="GET" action="{% url 'to_do_app:task-list' %}" class="search_form" >
 
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn">пошук</button>
-
+        <input type="hidden" name="sort" value="{{ request.GET.sort }}">
+        <input type="hidden" name="filters" value="{{ request.GET.filters }}">
     </form>
+     <!--        Sorting -->
+        <form method="get" action="{% url 'to_do_app:task-list' %}">
+            <label for="sort">Сортувати:</label>
+            <select name="sort" id="sort" onchange="this.form.submit()">
+                <option value="">-- Не сортувати --</option>
+                <option value="done" {% if request.GET.sort == 'done' %}selected{% endif %}>Виконані вгорі</option>
+                <option value="undone" {% if request.GET.sort == 'undone' %}selected{% endif %}>Невиконані вгорі</option>
+                <option value="data_added" {% if request.GET.sort == 'data_added' %}selected{% endif %}>За датою</option>
+            </select>
+
+            <!-- зберігаємо значення поточного фільтра -->
+            <input type="hidden" name="filters" value="{{ request.GET.filters }}">
+        </form>
     </div>
+
+
 
     <h3 class="mt-4">Tasks: </h3>
     {% if tasks %}
@@ -53,6 +83,7 @@
                 <div>
                     <h4 class="task-title mb-1">{{ task.task_name }}</h4>
                     <p class="task-description mb-1">{{ task.description }}</p>
+                    <p class="task-description mb-1">{{ task.data_added }}</p>
 
                     {% if task.tags.exists %}
                     <p class="task-tags mb-1">
