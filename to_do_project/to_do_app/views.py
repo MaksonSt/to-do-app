@@ -89,13 +89,13 @@ def task_list(request):
 
 @login_required_message(login_url='to_do_app:login')
 def add_task(request):
-    if request.method == 'POST': # check which method we have in request
-        form = TaskForm(request.POST) #in request.POST data which we take from request
-        if form.is_valid():
-            form.save()
+    form = TaskForm(request.POST or None)
+    if form.is_valid():
+        task = form.save(commit=False)
+        task.user = request.user
+        task.save()
+        form.save_m2m()
         return redirect('to_do_app:task-list')
-    else:
-        form = TaskForm()
     return render(request, 'todo/add_task.html', {'form': form})
 
 

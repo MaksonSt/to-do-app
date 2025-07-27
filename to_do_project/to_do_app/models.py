@@ -24,7 +24,7 @@ class Task(models.Model):
     data_added = models.DateField(auto_now_add=True)
     due_date = models.DateTimeField(null=True, blank=True)
     complete = models.BooleanField(default=False)
-    tags = models.ManyToManyField(Tags, blank=True)
+    tags = models.ManyToManyField(Tags, blank=True, related_name='tasks')
     list = models.ForeignKey(ListOfTasks, on_delete=models.CASCADE, related_name='tasks', null=True, blank=True)
 
 
