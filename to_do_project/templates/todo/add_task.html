@@ -3,12 +3,41 @@
 {% block title %}Додати задачу{% endblock %}
 
 {% block content %}
-  <h2 class="plus">➕ Створити нову задачу</h2>
+<div class="add_task_container">
+  <h1  class="plus">Додати нове завдання</h1>
+  <div class="forms_container">
+    <form method="POST" class="task-form">
+      {% csrf_token %}
 
-  <form method="POST" class="task-form">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn">💾 Зберегти</button>
-    <a href="{% url 'to_do_app:Home' %}" class="btn cancel">↩ Назад</a>
-  </form>
+      <!-- Task Name -->
+      <div class="form-group">
+        {{ form.task_name }}
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        {{ form.description }}
+      </div>
+
+      <!-- Група для due_date + select -->
+      <div class="form-group-inline">
+        <div class="form-group">
+          {{ form.due_date }}
+        </div>
+        <div class="form-group">
+          <select name="tags" class="tag-select">
+            <option value="easy">easy</option>
+            <option value="important">important</option>
+            <option value="hard">hard</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="btn_add_task_container">
+      <button type="submit" class="btn_add_task btn-primary">Save Task</button>
+      </div>
+    </form>
+  </div>
+
 {% endblock %}

@@ -72,9 +72,6 @@ align-items: center !important;
   padding: 4%;
 }
 
-.mt-5{
-  color: white;
-}
 .badge-container{
   display: flex;
   flex-flow: row;
@@ -88,4 +85,7 @@ align-items: center !important;
 .search_container{
   display: flex;
   justify-content: flex-start;
+}
+.task-list-text{
+  color: white;
 }
