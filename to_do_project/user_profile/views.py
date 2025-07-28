@@ -7,11 +7,13 @@ from django.contrib import messages
 from django.views.generic import DetailView, UpdateView, ListView, View
 from .models import UserProfile
 from django.urls import reverse
+from to_do_app.views import login_required_message
 from .forms import UpdateProfileForm, UserUpdateForm
 
 User = get_user_model()
 
 
+login_required_message(login_url='to_do_app:login')
 class UserProfileDetailView(DetailView):
     model = UserProfile
     template_name = 'userprofile/profile.html'
@@ -30,6 +32,7 @@ class UserProfileDetailView(DetailView):
 
 
 
+login_required_message(login_url='to_do_app:login')
 class UserProfileUpdateView(View):
     def get(self, request, pk):
         form1 = UserUpdateForm(instance=request.user)

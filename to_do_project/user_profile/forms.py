@@ -21,20 +21,6 @@ class NameChangeForm(forms.ModelForm):
 
 
 
-
-# class UpdateProfileForm(forms.ModelForm):
-#     class Meta:
-#         model = UserProfile
-#         fields = ['bio', 'avatar', 'date_of_birth', 'background_color']
-#
-#         widgets = {
-#             'bio': forms.TextInput(attrs={'class': 'input-update-profile', 'placeholder': 'Describe yourself', 'rows': 4}),
-#             'avatar': forms.ClearableFileInput(attrs={'class': 'input-update-profile', 'placeholder': 'Image'}),
-#             'date_of_birth': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'input-update-profile', 'placeholder': 'Date of birth'}),
-#             'background_color': forms.TextInput(attrs={'type': 'color', 'class': 'input-update-profile'}),
-#         }
-
-
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
