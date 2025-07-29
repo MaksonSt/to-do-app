@@ -58,7 +58,9 @@ def create_list_of_tasks(request):
     if request.method == 'POST':
         form = ListTasksForm(request.POST)
         if form.is_valid():
-            form.save()
+            tasklist = form.save(commit=False)
+            tasklist.user = request.user
+            tasklist.save()
             return redirect('to_do_app:task-list')
     else:
         form = ListTasksForm()
