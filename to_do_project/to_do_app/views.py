@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
-from .models import Task, CustomUser
+from .models import Task, CustomUser, Tags
 from .forms import TaskForm, RegistrationForm, ResetPasswordForm, TaskSearchForm, LoginForm
 from todo_lists.models import ListOfTasks
 from django.contrib.messages.views import SuccessMessageMixin
@@ -47,6 +47,20 @@ def task_list(request):
     tasks = Task.objects.filter(list__isnull=True, user=request.user)
     tasklists = ListOfTasks.objects.all()
     form = TaskSearchForm(request.GET or None)
+    all_tags = Tags.objects.all()
+
+    FILTER_MAPPING = {
+        'done': lambda queryset: queryset.filter(complete=True),
+        'undone': lambda queryset: queryset.filter(complete=False),
+        'tags': lambda queryset, value: queryset.filter(tags__name=value)
+    }
+
+    SORT_MAPPING = {
+        'done': lambda queryset: queryset.order_by('-complete'),
+        'undone': lambda queryset: queryset.order_by('complete'),
+        'data_added': lambda queryset: queryset.order_by('data_added'),
+        'alphabet': lambda queryset: queryset.order_by('-task_name')
+    }
 
     sort_param = request.GET.get('sort')
     filter_param = request.GET.get('filters')
@@ -54,34 +68,30 @@ def task_list(request):
     if request.GET:
 
         # sorting
-        if sort_param == 'done':
-            tasks = tasks.order_by('-complete')
-        elif sort_param == 'undone':
-            tasks = tasks.order_by('complete')
-        elif sort_param == 'data_added':
-            tasks = tasks.order_by('data_added')
-        elif sort_param == 'alphabet':
-            tasks = tasks.order_by('task_name')
+        if sort_param in SORT_MAPPING:
+            tasks = SORT_MAPPING[sort_param](tasks)
 
         #filters
-        if filter_param == 'done':
-            tasks = tasks.filter(complete=True)
-        elif filter_param == 'undone':
-            tasks = tasks.filter(complete=False)
+        if filter_param in FILTER_MAPPING:
+            if filter_param == 'tags':
+                tag_value = request.GET.get('tag')
+                if tag_value:
+                    tasks = FILTER_MAPPING['tags'](tasks, tag_value)
+            else:
+                tasks = FILTER_MAPPING[filter_param](tasks)
 
         #searching
         if form.is_valid():
             query = form.cleaned_data.get('query')
             if query:
                 tasks = tasks.filter(Q(task_name__icontains=query) | Q(description__icontains=query))
-            elif 'query' in request.GET:
-                messages.warning(request, "Поле для пошуку не може бути порожнім.")
 
 
     context = {
             'form' : form,
             'tasks' : tasks,
-            'tasklists' : tasklists
+            'tasklists' : tasklists,
+            'all_tags': all_tags
         }
 
     return render(request, 'todo/task_list.html', context)

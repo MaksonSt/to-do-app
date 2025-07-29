@@ -16,7 +16,20 @@
                 <option value="">-- Усі --</option>
                 <option value="done" {% if request.GET.filters == 'done' %}selected{% endif %}>Лише виконані</option>
                 <option value="undone" {% if request.GET.filters == 'undone' %}selected{% endif %}>Лише невиконані</option>
+                <option value="tags" {% if request.GET.filters == 'tags' %}selected{% endif %}>За тегом</option>
             </select>
+
+            {% if request.GET.filters == 'tags' %}
+                <label for="tag">Оберіть тег:</label>
+                <select name="tag" id="tag" onchange="this.form.submit()">
+                    {% for tag in all_tags %}
+                        <option value="{{ tag.name }}" {% if request.GET.tag == tag.name %}selected{% endif %}>
+                            {{ tag.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            {% endif %}
+        </form>
 
             <!-- зберігаємо значення поточного сортування -->
             <input type="hidden" name="sort" value="{{ request.GET.sort }}">
